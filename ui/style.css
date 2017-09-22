@@ -1,7 +1,6 @@
 body {
-    font-family: sans-serif;
-    background-color: lightgrey;
-    margin-top: 75px;
+    font-family: 'Wendy One', sans-serif;
+    margin-top: 50px;
 }
 
 .center {
@@ -9,7 +8,7 @@ body {
 }
 
 .text-big {
-    font-size: 300%;
+    font-size: 200%;
 }
 
 .bold {
@@ -20,3 +19,19 @@ body {
     height: 200px;
 }
 
+.container {
+	max-width: 80%;
+	margin: 0 auto;
+	color: #00BCD4;
+	font-family: sans-sarif;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.h4 {
+  text-decoration: underline;
+}
+
+.p {
+  color: blue;
+}
