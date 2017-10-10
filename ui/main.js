@@ -21,38 +21,39 @@ img.onclick = function () {
 };
 
 // Action 3 (start): Counter code
+
 // Option 1 ==> within client code
-var buttonC = document.getElementById('click2count');
+//	This button <button id="clickclient">Click Client!</button> has been clicked <span id="clientcount">0</span> times from Client. <br>
+var clientbutton = document.getElementById('clickclient');
 var clientcounter = 0;
-buttonC.onclick = function() {
+clientbutton.onclick = function() {
 	// Render the variable in the correct span
 	clientcounter = clientcounter + 1;
-	var spanC = document.getElementById('clientcount');
-	spanC.innerHTML = clientcounter.toString();
+	var clientspan = document.getElementById('clientcount');
+	clientspan.innerHTML = clientcounter.toString();
 };
 
-//Option 2 ==> make equest to servercount endpoint
-var button = document.getElementById('counter');
-button.onclick = function() {
-
-	// (a)II Create a request object
+// Option 2 ==> make equest to servercount endpoint
+//	This button <button id="clickserver">Click Server!</button> has been clicked <span id="servercount">0</span> times from server. <br>
+var serverbutton = document.getElementById('clickserver');
+serverbutton.onclick = function() {
+	//	(a)II Create a request object
 	var request = new XMLHttpRequest();
 
-	// (b) capture a response and store it in a variable
+	//	(b) capture a response and store it in a variable
 	request.onreadystatechange = function () {
 		if (request.readyState === XMLHttpRequest.DONE) {
 			//take some action
 			if (request.status === 200) {
 				// request is successfully completed, extract the value from the request
-				var counter = request.resposeText;
-			// (c) Render the variable in the correct span
-				var span = document.getElementById('count');
-				span.innerHTML = counter.toString();
+				var servercounter = request.responseText;
+	//	(c) Render the variable in the correct span
+				var serverspan = document.getElementById('servercount');
+				serverspan.innerHTML = servercounter.toString();
 			}
 		}
 		//not done yet
 	};
-
 	// (a)I Make a request to the counter endpoint
 //	request.open('GET', 'http://127.0.0.1:8080/counter', true);
 	request.open('GET', 'http://aroraamu111.imad.hasura-app.io/counter', true);
