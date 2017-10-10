@@ -32,30 +32,27 @@ buttonC.onclick = function() {
 };
 
 //Option 2 ==> make equest to servercount endpoint
+//  This button <button id="counter">Click me!</button> has been clicked  <span id="count">0</span> times from server.
 var button = document.getElementById('counter');
 button.onclick = function() {
-
 	// (a)II Create a request object
 	var request = new XMLHttpRequest();
-
 	// (b) capture a response and store it in a variable
 	request.onreadystatechange = function () {
 		if (request.readyState === XMLHttpRequest.DONE) {
 			//take some action
 			if (request.status === 200) {
 				// request is successfully completed, extract the value from the request
-				var counter = request.resposeText;
+				var counters = request.resposeText;
 			// (c) Render the variable in the correct span
 				var span = document.getElementById('count');
-				span.innerHTML = counter.toString();
+				span.innerHTML = counters.toString();
 			}
 		}
 		//not done yet
 	};
-
 	// (a)I Make a request to the counter endpoint
-//	request.open('GET', 'http://127.0.0.1:8080/counter', true);
-	request.open('GET', 'http://aroraamu111.imad.hasura-app.io/counter', true);
+	request.open('GET', 'http://127.0.0.1:8080/counter', true);
 	request.send(null);
 };
 // Action 3 (end): Counter code
