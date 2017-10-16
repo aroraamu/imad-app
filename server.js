@@ -4,7 +4,16 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-	
+
+// Do not change port, otherwise your app won't run on IMAD servers
+var prod = 80; //use for iMad server deployment
+// Use 8080 only for local development if you already have apache running on 80
+var dev = 8080; //use for local host deployment
+
+//switch environment
+var port = prod; 
+//var port = dev;
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -149,6 +158,18 @@ app.get('/counter', function (req, res) {
 	res.send(counter.toString());
 });
 
+var names = [];
+// app.get('/submit-name/:name', function(req, res) { //query parameter approach
+	//get the name from the request 
+//	var name = req.params.name;
+	app.get('/submit-name', function(req, res) { //query parameter approach. e.g. URL:/submit-name?name=xxxxx
+	var name = req.query.name;
+
+	names.push(name);
+	// JSON : JavaScript Object Notation
+	res.send(JSON.stringify(names)); // <= convert array into string
+});
+
 app.get('/:articleName', function (req, res) {
 	// articlename = articlethree
 	// articles[articlename] == {} content object for article-three
@@ -167,12 +188,6 @@ app.get('/ui/main.js', function (req, res) {
 app.get('/ui/pic/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/pic/', 'madi.png'));
 });
-
-// Do not change port, otherwise your app won't run on IMAD servers
-// Use 8080 only for local development if you already have apache running on 80
-
-var port = 80; //use for iMad server deployment
-//var port = 8080; //use for local host deployment
 
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);

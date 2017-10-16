@@ -1,5 +1,12 @@
 console.log('Loaded JS from main.js!');
 
+var prod = 'http://aroraamu111.imad.hasura-app.io/'
+var dev = 'http://127.0.0.1:8080/';
+
+//switch environment
+var port = prod; 
+//var port = dev;
+
 // Action 1: change the text of the index.html
 //   get the element from html
 var consolelement = document.getElementById('main-text');
@@ -55,8 +62,61 @@ serverbutton.onclick = function() {
 		//not done yet
 	};
 	// (a)I Make a request to the counter endpoint
-//	request.open('GET', 'http://127.0.0.1:8080/counter', true);
-	request.open('GET', 'http://aroraamu111.imad.hasura-app.io/counter', true);
+//	request.open('GET', 'http://127.0.0.1:8080/counter', true); //use this setting on local
+//	request.open('GET', 'http://aroraamu111.imad.hasura-app.io/counter', true); //use this setting on server
+	request.open('GET', dev + 'counter', true);
 	request.send(null);
 };
 // Action 3 (end): Counter code
+
+//// Submit Name
+//var nameInput = document.getElementById('name');
+//var name = nameInput.value;
+//var submitB = document.getElementById('submit_btn');
+//submitB.onclick = function() {
+//	// make the request to the server and send the name
+//	
+//	// capture a list of names and render it as a list
+//	var names = ['name1', 'name2', 'name3','name4'];
+//	var list = '';
+//	for (var i=0; i < names.length; i++) {
+//		list += '<li>' + names [i] + '</li>';
+//	};
+	
+//	// make the request
+//	var ul = document.getElementById('namelist');
+//	ul.innerHTML = list;
+//};
+
+// Submit Name thru server
+
+var submitB = document.getElementById('submit_btn');
+submitB.onclick = function() {
+	//	Create a requestB object
+	var requestB = new XMLHttpRequest();
+	//	(b) capture a response and store it in a variable
+	requestB.onreadystatechange = function () {
+		if (requestB.readyState === XMLHttpRequest.DONE) {
+			//take some action
+			if (requestB.status === 200) {
+				// Capture a list of names and render it as a list
+				var names = requestB.responseText;
+				names = JSON.parse(names);
+				var list = '';
+				for (var i=0; i < names.length; i++) {
+					list += '<li>' + names [i] + '</li>';
+				};
+				var ul = document.getElementById('namelist');
+				ul.innerHTML = list;
+			}
+		}
+	};
+
+	// Make a request to the submit-name endpoint
+	var nameInput = document.getElementById('name');
+	var name = nameInput.value;
+//	requestB.open('GET', 'http://127.0.0.1:8080/submit-name?name=' + name, true); //use this setting on local
+//	requestB.open('GET', 'http://aroraamu111.imad.hasura-app.io/submit-name?name=' + name, true); //use this setting on server
+	requestB.open('GET', dev + 'submit-name?name=' + name, true);
+	requestB.send(null);
+};
