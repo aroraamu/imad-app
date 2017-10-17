@@ -4,8 +4,8 @@ var prod = 'http://aroraamu111.imad.hasura-app.io/'
 var dev = 'http://127.0.0.1:8080/';
 
 //switch environment
-var port = prod; 
-//var port = dev;
+var env = prod; 
+//var env = dev;
 
 // Action 1: change the text of the index.html
 //   get the element from html
@@ -64,7 +64,7 @@ serverbutton.onclick = function() {
 	// (a)I Make a request to the counter endpoint
 //	request.open('GET', 'http://127.0.0.1:8080/counter', true); //use this setting on local
 //	request.open('GET', 'http://aroraamu111.imad.hasura-app.io/counter', true); //use this setting on server
-	request.open('GET', dev + 'counter', true);
+	request.open('GET', env + 'counter', true);
 	request.send(null);
 };
 // Action 3 (end): Counter code
@@ -117,6 +117,6 @@ submitB.onclick = function() {
 	var name = nameInput.value;
 //	requestB.open('GET', 'http://127.0.0.1:8080/submit-name?name=' + name, true); //use this setting on local
 //	requestB.open('GET', 'http://aroraamu111.imad.hasura-app.io/submit-name?name=' + name, true); //use this setting on server
-	requestB.open('GET', dev + 'submit-name?name=' + name, true);
+	requestB.open('GET', env + 'submit-name?name=' + name, true);
 	requestB.send(null);
 };
