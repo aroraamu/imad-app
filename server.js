@@ -29,11 +29,11 @@ app.get('/', function (req, res) {
 });
 
 var pool = new Pool(config);
-app.get('/test-db', funtion (req, res) {
+app.get('/test-db', function (req, res) {
     // make a select request
     
     // return the response
-    pool.query('select * FROM test', funtion (err, result) {
+    pool.query('select * FROM test', function (err, result) {
         if (err) {
             res.status(500).send(err.toString());
         } else {
