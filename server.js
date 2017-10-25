@@ -204,6 +204,10 @@ var names = [];
 
 // replace above code by code to fetch form db
 app.get('/articles/:articleName', function (req, res) {
+//    Query=> SELECT * FROM article WHERE title = 'article-two'
+//    pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function (err,result) {
+//  Hackers Query=> SELECT * FROM article WHERE title = ''; DELETE WHERE a = 'asdf'
+//  Smart Query=> SELECT * FROM article WHERE title = '\';DELETE WHERE a = \'asdf'
     pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function (err,result) {
         if (err) {
             res.status(500).send(err.toString);
