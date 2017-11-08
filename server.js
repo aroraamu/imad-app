@@ -30,12 +30,15 @@ app.get('/', function (req, res) {
 });
 
 function hash(input, salt) {  
-    //how do we crea    te a hash
+    //how do we create a hash
     //const crypto = require('rypto');
     //const key = crypto.pbkdf2Sync('secret', 'salt', 100000, 64, 'sha512');
     //console.log(key.toString('hex'));  // '3745e48...08d59ae'
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
     return hashed.toString('hex');
+    
+    //algo : md5
+    //"password" -> hgk2j3kj3j4hk3hkj43
 }
 app.get('/hash/:input', function(req, res) {
    var hashedString = hash(req.params.input, 'this-is-a-random-string');
